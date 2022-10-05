@@ -7,81 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            background-color: #000;
-            color: crimson;
-        }
-
-        .text3 {
-            font-size: 30px;
-        }
-
         .typing-curser {
             border-right: 2px solid red;
-        }
-
-        span[class^="typing"] {
-            color: crimson;
-            text-shadow: 0 0 5px crimson, 0 0 25px crimson, 0 0 50px crimson;
-            padding: 5px;
-            letter-spacing: 3px;
         }
     </style>
 </head>
 
 <body>
-
-    <span class="typing"></span>
-    <span class="typing1"></span>
-    <span class="typing2"></span>
-    <span class="typing3"></span>
-    <span class="typing4"></span>
-    <span class="typing5"></span>
-
+    <div class="text3">
+        <span class="typing"></span>
+    </div>
 
     <script>
-        var $ =(c) =>{return document.querySelector(c)}
-        tp($('.typing'), ["YouTuber", "Designer", "Freelancer", "Web Developer"])
-        tp($('.typing1'), ["YouTuber", "Designer", "Freelancer", "Web Developer"])
+        var str = ["YouTuber", "Designer", "Freelancer", "Web Developer"]
+        var typed = document.querySelector('.typing')
+        var st = document.createElement('span')
+        st.classList.add('typing-curser')
+        typed.insertAdjacentElement('afterend', st)
+        let str_l = 0, text_l = 0;
+        console.log(str.length)
 
-        function tp(ele, str) {
-            // var typed = document.querySelector('.typing')
-            var st = document.createElement('span')
-            st.classList.add('typing-curser')
-            ele.insertAdjacentElement('afterend', st)
-            let str_l = 0, text_l = 0;
-            console.log(str.length)
+        const typingDelay = 150;
+        const erasingDelay = 100;
+        const newTextDelay = 1000;
 
-            const typingDelay = 200;
-            const erasingDelay = 100;
-            const newTextDelay = 1000;
-
-            function type() {
-                if (text_l <= str[str_l].length) {
-                    ele.textContent = str[str_l].substring(0, text_l)
-                    text_l++;
-                    setTimeout(type, typingDelay);
-                }
-                else {
-                    setTimeout(erase, newTextDelay);
-                }
+        function type() {
+            if (text_l <= str[str_l].length) {
+                typed.textContent = str[str_l].substring(0, text_l);
+                text_l++;
+                setTimeout(type, typingDelay);
             }
-            function erase() {
-                if (text_l > 0) {
-                    text_l--;
-                    ele.textContent = str[str_l].substring(0, text_l)
-                    setTimeout(erase, erasingDelay);
-                } else {
-                    str_l++;
-                    if (str_l >= str.length) str_l = 0;
-                    setTimeout(type, typingDelay + 1100)
-                }
+            else {
+                setTimeout(erase, newTextDelay);
             }
-            setTimeout(type, 1250)
         }
-
-
-
+        function erase() {
+            if (text_l > 0) {
+                text_l--;
+                typed.textContent = str[str_l].substring(0, text_l);
+                setTimeout(erase, erasingDelay);
+            } else {
+                str_l++;
+                if(str_l >= str.length)str_l = 0;
+                setTimeout(type, typingDelay + 1000)
+            }
+        }
+        setTimeout(type,1500)
     </script>
 
 </body>
