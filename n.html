@@ -14,9 +14,9 @@
 </head>
 
 <body>
-    <div class="text3">
+
         <span class="typing"></span>
-    </div>
+
 
     <script>
         var str = ["YouTuber", "Designer", "Freelancer", "Web Developer"]
@@ -25,31 +25,26 @@
         st.classList.add('typing-curser')
         typed.insertAdjacentElement('afterend', st)
         let str_l = 0, text_l = 0;
-        console.log(str.length)
-
-        const typingDelay = 150;
-        const erasingDelay = 100;
-        const newTextDelay = 1000;
 
         function type() {
             if (text_l <= str[str_l].length) {
                 typed.textContent = str[str_l].substring(0, text_l);
                 text_l++;
-                setTimeout(type, typingDelay);
+                setTimeout(type, 150);
             }
             else {
-                setTimeout(erase, newTextDelay);
+                setTimeout(erase, 1000);
             }
         }
         function erase() {
             if (text_l > 0) {
                 text_l--;
                 typed.textContent = str[str_l].substring(0, text_l);
-                setTimeout(erase, erasingDelay);
+                setTimeout(erase, 100);
             } else {
                 str_l++;
                 if(str_l >= str.length)str_l = 0;
-                setTimeout(type, typingDelay + 1000)
+                setTimeout(type, 1150)
             }
         }
         setTimeout(type,1500)
