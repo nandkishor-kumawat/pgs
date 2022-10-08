@@ -134,6 +134,10 @@ button {
     color: #fff;
 }
 
+#length {
+    width: 80%;
+}
+
 #slider {
     -webkit-appearance: none;
     width: calc(100% - (70px));
